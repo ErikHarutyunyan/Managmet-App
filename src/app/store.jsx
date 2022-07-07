@@ -1,12 +1,18 @@
-import { combineReducers, createStore, applyMiddleware } from "redux";
+import {combineReducers, createStore, applyMiddleware} from "redux";
 import thunk from "redux-thunk";
-import {ini} from "./features/currentUser/currentUserSlice"
+
+import {
+  initialCurrentUser,
+  currentUserReducer,
+} from "./features/currentUser/currentUserSlice";
+
+
 const store = createStore(
   combineReducers({
-
+    user: currentUserReducer,
   }),
   {
-
+    user: initialCurrentUser,
   },
   applyMiddleware(thunk)
 );

@@ -27,11 +27,11 @@ const SuccessLogin = () => {
             <h3>You have logged in!</h3>
           </SuccessLoginInfo>
           <SuccessLoginUser>
-            <div className="button_successLogin_wrapper">
+            <div className="button_sucessLogin_wrapper">
               <button
                 type="submit"
                 value="submit"
-                id="button_successLogin"
+                id="button_sucessLogin"
                 onClick={handlerHome}
               >
                 Go to Main Page

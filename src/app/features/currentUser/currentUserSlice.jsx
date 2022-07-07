@@ -1,48 +1,92 @@
-import { loginCurrentUser } from "./currentUserAPI";
+import { loginCurrentUser, regCurrentUser } from "./currentUserApi";
+import Cookies from "js-cookie";
 
-// export function currentUserReducer(state = {}, action) {
-//   if (action.type === "edit-current-user-name") {
-//     return {
-//       // ...state karainq sench anenq ete currentUser unenar tariq kam ael info
-//       name: action.payload.name
-//     };
-//   }
-//   return state;
-// }
-// export const initialCurrentUser = {
-//   name: "Joe Shmoe"
-// };
+export function currentUserReducer(state = {}, action) {
+  if (action.type === "login") {
+    return {
+      data: action.payload.data,
+    };
+  }
+  if (action.type === "logout") {
+    return {
+      data: null,
+    };
+  }
+  if (action.type === "login-error") {
+    return {
+      data: action.payload.user,
+    };
+  }
+  return state;
+}
 
-// export function selectName(state) {
-//   return state.currentUser.name;
-// }
-
-// editName functian kochvuma action creator
-// isk veradardzvox objecte action
-// export function editName(newName) {
-//   return {
-//     type: "edit-current-user-name",
-//     payload: {
-//       name: newName
-//     }
-//   };
+// export function selectUser(state) {
+//   return state.user;
 // }
 
-// dispatch hnaravorutyune talis uxarkel xndranq vorpeszi reducer-nere poxen state
-// getState functia e vore veradardznuma verchi state
+// export function selectUserActive(state) {
+//   return false;
+// }
 
-// himanakanum ete menq tenum enq mi inch vor functia, menq gitenq vor da functia e, baech ete et functia  patatum enq functia-i mech aesiqn et functian karox enq ashxatachnel apagayum et functian kanchelov et functian in anvanum enq "thunks"
-// loadUser() functian vore uneq, inqe veradardznuma mi hat functia vore apagayum karox e anel gorchoxutyun  
-// dispatch, getState) => {} aes functiain menq anvanum enq "thunks"
+export function userLogout() {
+  Cookies.remove("JwtToken");
+  Cookies.remove("RefreshToken");
+  return {
+    type: "logout",
+  };
+}
+
+export function userLoginError() {
+  return {
+    type: "login-error",
+    payload: {
+      user: {
+        loginUser: false,
+        msg: "Your email address or password is not correct",
+      },
+    },
+  };
+}
+
+export function userLogin(data) {
+  console.log("userLogin222", data);
+  return {
+    type: "login",
+    payload: {
+      data,
+    },
+  };
+}
+
 export function loginUser(data) {
   return (dispatch, getState) => {
-    return loginCurrentUser(data).then((responseUser) => {
-      if (tokenData) {
-        Cookies.set("auth-token", tokenData);
-      } else {
-        Cookies.remove("auth-token");
-      }
-      dispatch(editName(responseUser.data.user))
-    })
-  }
+    debugger;
+    return loginCurrentUser(data)
+      .then((responseUser) => {
+        console.log("QWE", responseUser);
+        if (responseUser.data.Item.JwtToken) {
+          debugger;
+          Cookies.set("JwtToken", responseUser.data.Item.JwtToken);
+          Cookies.set("RefreshToken", responseUser.data.Item.RefreshToken);
+          dispatch(userLogin(responseUser.data.Item));
+        } else {
+          Cookies.remove("auth-token");
+        }
+      })
+      .catch(() => dispatch(userLoginError()));
+  };
 }
+
+export function registerUser(data) {
+  return (dispatch, getState) => {
+    return regCurrentUser(data)
+      .then((responseUser) => {
+        console.log(responseUser);
+      })
+      .catch(() => dispatch(userLoginError()));
+  };
+}
+
+export const initialCurrentUser = {
+  data: null,
+};

@@ -1,5 +1,6 @@
 import { useNavigate, Link } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 // For form
 import { useForm } from "react-hook-form";
@@ -14,9 +15,14 @@ import {
   LoginFormFooter,
   ErrorMessage,
 } from "./LoginForm.styled";
+import {
+  loginUser,
+  selectUser,
+} from "../../app/features/currentUser/currentUserSlice";
 
 const LoginForm = () => {
   const [errorMsg, setErrorMsg] = useState(null);
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -26,11 +32,10 @@ const LoginForm = () => {
     // onSubmit
     resolver: yupResolver(validationSchema),
   });
-  const onSubmit = (data) => {
-    // console.log(data);
 
+  const onSubmit = async (data) => {
     try {
-      console.log(data);
+      await dispatch(loginUser(data));
     } catch (e) {
       if (e.response.status === 422) {
         setErrorMsg("Your email address or password is not correct");
@@ -38,10 +43,10 @@ const LoginForm = () => {
     } finally {
     }
   };
-  const navigate = useNavigate();
-  const handlerHome = () => {
-    navigate("/dashboard");
-  };
+
+  // const handlerHome = () => {
+  //   navigate("/dashboard");
+  // };
   const [passwordShown, setPasswordShown] = useState(false);
 
   const togglePassword = () => {
@@ -73,7 +78,7 @@ const LoginForm = () => {
               <div className="pass_wrapper">
                 <label htmlFor="pass_log">Password</label>
                 <input
-                   type={passwordShown ? "text" : "password"}
+                  type={passwordShown ? "text" : "password"}
                   name="pass_log"
                   id="pass_log"
                   {...register("password")}

@@ -27,7 +27,7 @@ export const GlobalStyle = createGlobalStyle`
     display: block;
   }
   body,
-  html {
+  html,#root {
     height: 100%;
     width: 100%;
     font-size: 100%;
@@ -73,6 +73,7 @@ export const GlobalStyle = createGlobalStyle`
     font-weight: inherit;
     box-sizing: border-box;
   }
+
   :root {
     --color-white: #ffffff;
     --color-gray-100: #F1F5F9;
@@ -86,6 +87,7 @@ export const GlobalStyle = createGlobalStyle`
     --color-blue-500:#1D4ED8;
     --color-blue-400:#3460DC;
     --color-error: #c70b0b;
+    --shadow-xxl: 0px 25px 50px -12px rgba(0, 0, 0, 0.1);
   }
 `;
 

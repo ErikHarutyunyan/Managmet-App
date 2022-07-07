@@ -21,7 +21,7 @@ const GoToMainPage = () => {
 
         return newValue;
       });
-    }, 10000);
+    }, 10);
   }, []);
 
   return (
