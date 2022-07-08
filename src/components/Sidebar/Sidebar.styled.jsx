@@ -20,6 +20,7 @@ export const SidebarWrapper = styled.aside`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    overflow: hidden;
   }
   & ul {
     display: flex;
@@ -32,15 +33,18 @@ export const SidebarWrapper = styled.aside`
   }
   & ul li {
     width: 100%;
-    display: flex;
+    /* display: flex;
     justify-content: center;
-    align-items: center;
-    width: 56px;
+    align-items: center; */
+    width: 208px;
     height: 56px;
     border-radius: 8px;
     & a {
       display: flex;
       align-items: center;
+      border-radius: 8px;
+      padding: 10px;
+      transition: all 0.5s ease;
       & span {
         font-family: "Inter";
         font-style: normal;
@@ -53,10 +57,14 @@ export const SidebarWrapper = styled.aside`
         color: #f8fafc;
         display: none;
       }
+      & svg {
+        width: 32px;
+        height: 32px;
+      }
     }
     &.active {
       justify-content: initial;
-      width: auto;
+      /* width: auto; */
       transition: all 0.5s ease;
       & a {
         & span {
@@ -67,7 +75,7 @@ export const SidebarWrapper = styled.aside`
     }
   }
   & ul li {
-    &:hover {
+    & a:hover {
       background-color: var(--color-blue-400);
       .logo_home {
         path {

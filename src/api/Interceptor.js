@@ -7,7 +7,7 @@ const axiosInstance = axios.create({
 });
 
 axiosInstance.interceptors.request.use(
-  (config) => {
+ async (config) => {
     const authToken = Cookies.get("auth-token");
 
     if (authToken) {

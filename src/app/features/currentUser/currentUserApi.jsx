@@ -1,7 +1,6 @@
 import axiosApiInstance from "../../../api/Interceptor";
 
 export async function loginCurrentUser(data) {
-  console.log("loginCurrentUser", data);
   return await axiosApiInstance.post(`UserAccount/Authorize`, data);
 }
 export async function regCurrentUser(data) {

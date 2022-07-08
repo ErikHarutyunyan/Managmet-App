@@ -1,79 +1,119 @@
 import { loginCurrentUser, regCurrentUser } from "./currentUserApi";
-import Cookies from "js-cookie";
 
-export function currentUserReducer(state = {}, action) {
-  if (action.type === "login") {
+import Cookies from "js-cookie";
+import { setMessage, clearMessage } from "./message";
+
+const user = JSON.parse(localStorage.getItem("user"));
+const initialState = user
+  ? { isLoggedIn: true, user }
+  : { isLoggedIn: false, user: null };
+
+export function currentUserReducer(state = initialState, action) {
+  if (action.type === "register_success") {
     return {
-      data: action.payload.data,
+      ...state,
+      isLoggedIn: false,
+    };
+  }
+  if (action.type === "register_fail") {
+    return {
+      ...state,
+      isLoggedIn: false,
+    };
+  }
+  if (action.type === "login_success") {
+    return {
+      ...state,
+      isLoggedIn: true,
+      user: action.payload.data,
     };
   }
   if (action.type === "logout") {
     return {
-      data: null,
+      ...state,
+      isLoggedIn: false,
+      user: null,
     };
   }
-  if (action.type === "login-error") {
+  if (action.type === "login_fail") {
+    console.log("login_fail");
     return {
-      data: action.payload.user,
+      ...state,
+      isLoggedIn: false,
+      user: null,
+    };
+  }
+  if (action.type === "refresh_token") {
+    return {
+      ...state,
+      user: { ...user, accessToken: action.payload },
     };
   }
   return state;
 }
 
-// export function selectUser(state) {
-//   return state.user;
-// }
-
-// export function selectUserActive(state) {
-//   return false;
-// }
-
-export function userLogout() {
-  Cookies.remove("JwtToken");
-  Cookies.remove("RefreshToken");
+export function userRegError(data) {
   return {
-    type: "logout",
+    type: "register_fail",
   };
 }
 
-export function userLoginError() {
+export function userReg(data) {
   return {
-    type: "login-error",
-    payload: {
-      user: {
-        loginUser: false,
-        msg: "Your email address or password is not correct",
-      },
-    },
+    type: " register_success",
+  };
+}
+
+export function userLoginError(data) {
+  return {
+    type: "login_fail",
   };
 }
 
 export function userLogin(data) {
-  console.log("userLogin222", data);
   return {
-    type: "login",
+    type: "login_success",
     payload: {
       data,
     },
   };
 }
 
+export function userLogout() {
+  Cookies.remove("JwtToken");
+  Cookies.remove("RefreshToken");
+  localStorage.removeItem("user");
+  return {
+    type: "logout",
+  };
+}
+
+export const refreshToken = (accessToken) => (dispatch) => {
+  dispatch({
+    type: "refresh_token",
+    payload: accessToken,
+  });
+};
+
 export function loginUser(data) {
   return (dispatch, getState) => {
-    debugger;
     return loginCurrentUser(data)
       .then((responseUser) => {
-        console.log("QWE", responseUser);
         if (responseUser.data.Item.JwtToken) {
-          debugger;
+          localStorage.setItem("user", JSON.stringify(responseUser.data.Item));
           Cookies.set("JwtToken", responseUser.data.Item.JwtToken);
           Cookies.set("RefreshToken", responseUser.data.Item.RefreshToken);
           dispatch(userLogin(responseUser.data.Item));
+          dispatch(setMessage("Login success"));
         } else {
           Cookies.remove("auth-token");
         }
       })
-      .catch(() => dispatch(userLoginError()));
+      .catch((error) => {
+        const message = error.response.data.errorMessage;
+        dispatch(userLoginError());
+        dispatch(setMessage(message));
+      });
   };
 }
 
@@ -81,12 +121,13 @@ export function registerUser(data) {
   return (dispatch, getState) => {
     return regCurrentUser(data)
       .then((responseUser) => {
-        console.log(responseUser);
+        dispatch(userReg());
+        dispatch(setMessage("Register success"));
       })
-      .catch(() => dispatch(userLoginError()));
+      .catch((error) => {
+        const message = error.response.data.errorMessage;
+        dispatch(userRegError());
+        dispatch(setMessage(message));
+      });
   };
 }
-
-export const initialCurrentUser = {
-  data: null,
-};

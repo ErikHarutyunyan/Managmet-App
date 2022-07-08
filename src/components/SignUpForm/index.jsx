@@ -23,6 +23,9 @@ const SignUpForm = () => {
   // Dispatch
   const dispatch = useDispatch();
 
+  const navigate = useNavigate();
+
+
   const {
     register,
     handleSubmit,
@@ -36,18 +39,13 @@ const SignUpForm = () => {
   const onSubmit = (data) => {
     try {
       dispatch(registerUser(data));
+      navigate("/login");
     } catch (e) {
       if (e.response.status === 422) {
         setErrorMsg("Error");
       }
     } finally {
     }
-  };
-
-  const navigate = useNavigate();
-
-  const handlerHome = () => {
-    navigate("/dashboard");
   };
 
   const [passwordShown, setPasswordShown] = useState(false);

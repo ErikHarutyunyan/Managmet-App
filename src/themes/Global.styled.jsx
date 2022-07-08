@@ -89,6 +89,12 @@ export const GlobalStyle = createGlobalStyle`
     --color-error: #c70b0b;
     --shadow-xxl: 0px 25px 50px -12px rgba(0, 0, 0, 0.1);
   }
+  main {
+    max-width: 1440px;
+    margin: 0 auto;
+    height: calc(100% - 100px) ;
+    padding: 40px 80px 40px 60px;
+  }
 `;
 
 const GlobalContainer = styled.div`

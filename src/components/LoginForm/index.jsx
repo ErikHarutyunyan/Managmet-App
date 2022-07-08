@@ -33,9 +33,9 @@ const LoginForm = () => {
     resolver: yupResolver(validationSchema),
   });
 
-  const onSubmit = async (data) => {
+  const onSubmit = (data) => {
     try {
-      await dispatch(loginUser(data));
+      dispatch(loginUser(data));
     } catch (e) {
       if (e.response.status === 422) {
         setErrorMsg("Your email address or password is not correct");

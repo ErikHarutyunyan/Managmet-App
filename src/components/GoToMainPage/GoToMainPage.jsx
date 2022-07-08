@@ -4,7 +4,7 @@ import { BiLike } from "react-icons/bi";
 // Import Styled
 import { GoToMainPageWrapper, GoToMainPageInfo } from "./GoToMainPage.styled";
 import { Spinner } from "../Loader/Spinner";
-import ProgressBar from "../Loader/Progress.jsx";
+import ProgressBar from "../Loader/Progress.jsx/index.jsx";
 
 const GoToMainPage = () => {
   const [value, setValue] = useState(0);
@@ -16,12 +16,12 @@ const GoToMainPage = () => {
 
         if (newValue === 100) {
           clearInterval(interval);
-          navigate("/dashboard");
+          // navigate("/dashboard");
         }
 
         return newValue;
       });
-    }, 10);
+    }, 90);
   }, []);
 
   return (

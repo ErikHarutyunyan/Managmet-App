@@ -4,6 +4,7 @@ const Layout = () => {
   return (
     <>
       <div className="layout-wrraper">
+        
         <main>
           <Outlet />
         </main>

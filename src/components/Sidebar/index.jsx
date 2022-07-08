@@ -15,16 +15,18 @@ function Sidebar() {
   return (
     <SidebarWrapper className={sidebar ? "show" : "hide"}>
       <nav>
-        <ul >
+        <ul>
           {SidebarData.map((item, index, arr) => {
             return index + 1 !== arr.length ? (
               <li
                 key={index}
                 className={sidebar ? item.cName + " active" : item.cName}
-                onMouseEnter={menuIconClick}
-                onMouseLeave={menuIconClick}
               >
-                <Link to={"#"}>
+                <Link
+                  to={"#"}
+                  onMouseEnter={menuIconClick}
+                  onMouseLeave={menuIconClick}
+                >
                   {item.icon}
                   {/* {
                   
@@ -42,12 +44,16 @@ function Sidebar() {
               <li
                 className={
                   sidebar
-                    ? sideBarLastItem.cName
-                    : sideBarLastItem.cName + " active"
+                    ? sideBarLastItem.cName + " active"
+                    : sideBarLastItem.cName
                 }
                 onClick={menuIconClick}
               >
-                <Link to={sideBarLastItem.path}>
+                <Link
+                  to={sideBarLastItem.path}
+                  onMouseEnter={menuIconClick}
+                  onMouseLeave={menuIconClick}
+                >
                   {sideBarLastItem.icon}
                   <span>{sideBarLastItem.title}</span>
                 </Link>
