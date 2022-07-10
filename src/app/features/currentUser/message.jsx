@@ -2,9 +2,10 @@ const initialState = {};
 
 export function messageError(state = initialState, action) {
   if ((action.type === "set_message")) {
-    console.log("action.payload",action.payload)
+    const {message,error } = action.payload
     return {
-      message: action.payload,
+      message,
+      error,
     };
   }
   if ((action.type === "clear_message")) {

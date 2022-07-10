@@ -1,7 +1,7 @@
 import { LoginBg, LoginPageWrapper } from "./LoginPage.styled";
 import LoginForm from "../../components/LoginForm";
 import { useSelector } from "react-redux";
-import { useNavigate , Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { BiLike } from "react-icons/bi";
 import { GoToMainPageInfo, GoToMainPageWrapper } from "./GoToMainPage.styled";
@@ -17,22 +17,17 @@ const LoginPage = () => {
   const [showSuccess, setShowSuccess] = useState(false);
   const [goto, setGoto] = useState(true);
   const [successLog, setSuccessLog] = useState(false);
-  
+  const [isLoading, setIsLoading] = useState(false);
   const dataState = useSelector((state) => state);
-  console.log(dataState.user.isLoggedIn);
+
+  console.log("dataState.user.isLoggedIn", dataState.user.isLoggedIn);
 
   useEffect(() => {
-    if ((dataState?.user?.isLoggedIn)) {
-      console.log("first");
-      setShowSuccess(!showSuccess);
-    }
+    if (isLoading) setShowSuccess(!showSuccess);
     // eslint-disable-next-line
-  }, [dataState]);
+  }, [isLoading]);
 
   const [value, setValue] = useState(0);
-
-
-
 
   useEffect(() => {
     if (showSuccess) {
@@ -45,11 +40,11 @@ const LoginPage = () => {
             setGoto(!goto);
             setSuccessLog(!successLog);
           }
-
           return newValue;
         });
       }, 10);
     }
+    // eslint-disable-next-line
   }, [showSuccess]);
 
   const navigate = useNavigate();
@@ -57,6 +52,7 @@ const LoginPage = () => {
   const handlerHome = () => {
     navigate("/dashboard");
   };
+
   return (
     <>
       <LoginPageWrapper>
@@ -87,7 +83,7 @@ const LoginPage = () => {
               />
             </div>
           </GoToMainPageWrapper>
-        ) : successLog ? (
+        ) : successLog || dataState?.user?.isLoggedIn ? (
           <SuccessLoginWrapper>
             <div className="successLogin_container">
               <div className="successLogin">
@@ -112,7 +108,7 @@ const LoginPage = () => {
             </div>
           </SuccessLoginWrapper>
         ) : (
-          <LoginForm />
+          <LoginForm isLoading={setIsLoading} />
         )}
         {/* <LoginForm /> */}
       </LoginPageWrapper>

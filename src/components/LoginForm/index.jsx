@@ -19,9 +19,13 @@ import {
   loginUser,
   selectUser,
 } from "../../app/features/currentUser/currentUserSlice";
+import { clearMessage } from "../../app/features/currentUser/message";
 
-const LoginForm = () => {
+const LoginForm = ({ isLoading = (f) => f }) => {
   const [errorMsg, setErrorMsg] = useState(null);
+
+  const message = useSelector((state) => state.message);
+
   const dispatch = useDispatch();
   const {
     register,
@@ -33,16 +37,20 @@ const LoginForm = () => {
     resolver: yupResolver(validationSchema),
   });
 
-  const onSubmit = (data) => {
-    try {
-      dispatch(loginUser(data));
-    } catch (e) {
-      if (e.response.status === 422) {
-        setErrorMsg("Your email address or password is not correct");
-      }
-    } finally {
-    }
+  const onSubmit = async (data) => {
+    await dispatch(loginUser(data));
+     setErrorMsg(null);
   };
+
+  useEffect(() => {
+    if (message.error) {
+      setErrorMsg(message.message);
+    } else if (message.message === "Login success") {
+      dispatch(clearMessage());
+      isLoading((prev) => !prev);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [message]);
 
   // const handlerHome = () => {
   //   navigate("/dashboard");
@@ -62,6 +70,7 @@ const LoginForm = () => {
           </LoginFormInfo>
           <LoginFormUser>
             <form onSubmit={handleSubmit(onSubmit)}>
+              {errorMsg && <ErrorMessage>{errorMsg}</ErrorMessage>}
               <div className="email_wrapper">
                 <label htmlFor="email_log">Email</label>
                 <input
@@ -87,7 +96,11 @@ const LoginForm = () => {
                 {errors.password?.message && (
                   <ErrorMessage>{errors.password.message}</ErrorMessage>
                 )}
-                <button className="showPass" onClick={togglePassword}>
+                <button
+                  type="button"
+                  className="showPass"
+                  onClick={togglePassword}
+                >
                   <svg
                     width="24"
                     height="24"

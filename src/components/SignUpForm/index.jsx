@@ -1,4 +1,4 @@
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 // For form
@@ -15,6 +15,8 @@ import {
   ErrorMessage,
 } from "./SignUpForm.styled";
 import { registerUser } from "../../app/features/currentUser/currentUserSlice";
+import { useEffect } from "react";
+import { clearMessage } from "../../app/features/currentUser/message";
 
 const SignUpForm = () => {
   // Error message state
@@ -25,29 +27,30 @@ const SignUpForm = () => {
 
   const navigate = useNavigate();
 
-
+  const message = useSelector((state)=>state.message)
+ const user = useSelector((state) => state.user);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({
-    mode: "onBlur",
+    mode: "onSubmit",
     // onSubmit
     resolver: yupResolver(validationSchema),
   });
 
-  const onSubmit = (data) => {
-    try {
-      dispatch(registerUser(data));
-      navigate("/login");
-    } catch (e) {
-      if (e.response.status === 422) {
-        setErrorMsg("Error");
-      }
-    } finally {
-    }
+  const onSubmit = async (data) => {
+    await dispatch(registerUser(data));
   };
-
+  useEffect( () => {
+    if (message.error) {
+      setErrorMsg(message.message);
+    } else if (message.message === "Register success") {
+      dispatch(clearMessage())
+      navigate("/login");
+    }
+ // eslint-disable-next-line react-hooks/exhaustive-deps
+ },[message])
   const [passwordShown, setPasswordShown] = useState(false);
 
   const togglePassword = () => {
@@ -65,6 +68,7 @@ const SignUpForm = () => {
           <SignUpFormUser>
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="email_wrapper">
+                {errorMsg && <ErrorMessage>{errorMsg}</ErrorMessage>}
                 <label htmlFor="email_signUp">Email</label>
                 <input
                   type="email"
@@ -89,7 +93,7 @@ const SignUpForm = () => {
                 {errors.password?.message && (
                   <ErrorMessage>{errors.password.message}</ErrorMessage>
                 )}
-                <button className="showPass" onClick={togglePassword}>
+                <button type="button" className="showPass" onClick={togglePassword}>
                   <svg
                     width="24"
                     height="24"
@@ -129,10 +133,6 @@ const SignUpForm = () => {
                 </button>
               </div>
             </form>
-            {/* <SignUpFormFooter>
-              <p>No Accounts?</p>
-              <Link to="/signup">Sign-up</Link>
-            </SignUpFormFooter> */}
           </SignUpFormUser>
         </div>
       </SignUpFormWrapper>

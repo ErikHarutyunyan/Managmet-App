@@ -1,7 +1,14 @@
 import { SignUpBg, SignUpPageWrapper } from "./SignUpPage.styled";
 import SignUpForm from "../../components/SignUpForm";
+import { getCookie } from "../../utils";
+import { Navigate } from "react-router-dom";
 
 const SignUpPage = () => {
+  const auth = getCookie();
+  if (auth.loginUser) {
+    return <Navigate to={"/login"} replace />;
+  }
+
   return (
     <>
       <SignUpPageWrapper>
@@ -14,7 +21,7 @@ const SignUpPage = () => {
             </div>
           </div>
         </SignUpBg>
-        <SignUpForm/>
+        <SignUpForm />
       </SignUpPageWrapper>
     </>
   );

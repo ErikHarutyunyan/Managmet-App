@@ -104,15 +104,24 @@ export function loginUser(data) {
           Cookies.set("JwtToken", responseUser.data.Item.JwtToken);
           Cookies.set("RefreshToken", responseUser.data.Item.RefreshToken);
           dispatch(userLogin(responseUser.data.Item));
-          dispatch(setMessage("Login success"));
+          dispatch(
+            setMessage({
+              message: "Login success",
+              error: false,
+            })
+          );
         } else {
           Cookies.remove("auth-token");
         }
       })
       .catch((error) => {
-        const message = error.response.data.errorMessage;
         dispatch(userLoginError());
-        dispatch(setMessage(message));
+        dispatch(
+          setMessage({
+            message: "Your email address or password is not correct",
+            error: true,
+          })
+        );
       });
   };
 }
@@ -122,12 +131,12 @@ export function registerUser(data) {
     return regCurrentUser(data)
       .then((responseUser) => {
         dispatch(userReg());
-        dispatch(setMessage("Register success"));
+        dispatch(setMessage({ message: "Register success", error: false }));
       })
       .catch((error) => {
         const message = error.response.data.errorMessage;
         dispatch(userRegError());
-        dispatch(setMessage(message));
+        dispatch(setMessage({ message, error: true }));
       });
   };
 }

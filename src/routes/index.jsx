@@ -1,17 +1,16 @@
 import React from "react";
-import { Routes, Route, Navigate, Outlet } from "react-router-dom";
-import Dashboard from "../components/Dashboard";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { DashboardPage } from "../pages/Dashboard";
 
 // import Layout from "../layout";
-import ForgetPasswordPage from "../pages/ForgetPasswordPage";
+
 import LoginPage from "../pages/LoginPage";
 
 import NotFoundPage from "../pages/NotFoundPage/";
 
 import SignUpPage from "../pages/SignUpPage";
 
-import ProtectedRoute from "./ProtectedRoute";
+import PrivateRoute from "./PrivateRoute";
 
 export const index = () => {
   return (
@@ -20,9 +19,9 @@ export const index = () => {
         <Route
           path="/dashboard"
           element={
-            <ProtectedRoute>
+            <PrivateRoute>
               <DashboardPage />
-            </ProtectedRoute>
+            </PrivateRoute>
           }
         />
         <Route path="/" element={<Navigate to="/dashboard" replace />} />
