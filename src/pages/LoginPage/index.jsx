@@ -55,6 +55,9 @@ const LoginPage = () => {
 
   return (
     <>
+      {/* <GoToMainPage showSuccess={showSuccess} setShowSuccess={setShowSuccess} successLog={successLog} setSuccessLog={setSuccessLog}/>
+        {auth.loginUser && <SuccessLogin successLog={successLog} setSuccessLog={setSuccessLog}/>}
+        { !auth.loginUser  && <LoginForm isLoading={setIsLoading} />} */}
       <LoginPageWrapper>
         <LoginBg className="login_bg">
           <div className="login_title">
@@ -83,7 +86,7 @@ const LoginPage = () => {
               />
             </div>
           </GoToMainPageWrapper>
-        ) : successLog || dataState?.user?.isLoggedIn ? (
+        ) : successLog ? (
           <SuccessLoginWrapper>
             <div className="successLogin_container">
               <div className="successLogin">

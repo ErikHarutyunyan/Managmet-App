@@ -6,40 +6,58 @@ import { GoToMainPageWrapper, GoToMainPageInfo } from "./GoToMainPage.styled";
 import { Spinner } from "../Loader/Spinner";
 import ProgressBar from "../Loader/Progress.jsx/index.jsx";
 
-const GoToMainPage = () => {
+const GoToMainPage = ({
+  showSuccess,
+  setShowSuccess,
+  successLog,
+  setSuccessLog,
+  isGoHome
+}) => {
   const [value, setValue] = useState(0);
-  const navigate = useNavigate;
+
   useEffect(() => {
-    const interval = setInterval(() => {
-      setValue((oldValue) => {
-        const newValue = oldValue + 1;
+    if (showSuccess) {
+      const interval = setInterval(() => {
+        setValue((oldValue) => {
+          const newValue = oldValue + 1;
+          if (newValue === 100) {
+            clearInterval(interval);
+            setShowSuccess(showSuccess);
+            setSuccessLog(!successLog);
+            isGoHome((prev)=> !prev)
+          }
+          return newValue;
+        });
+      }, 10);
+    }
+    // eslint-disable-next-line
+  }, [showSuccess]);
 
-        if (newValue === 100) {
-          clearInterval(interval);
-          // navigate("/dashboard");
-        }
-
-        return newValue;
-      });
-    }, 90);
-  }, []);
-
-  return (
-    <>
-      <GoToMainPageWrapper>
-        <div className="goToMainPage_container">
-          <div className="goToMainPage">
-            <Spinner />
+  if (showSuccess) {
+    return (
+      <>
+        <GoToMainPageWrapper>
+          <div className="goToMainPage_container">
+            <div className="goToMainPage">
+              <Spinner />
+            </div>
+            <GoToMainPageInfo>
+              <h1>Going to the Main Page</h1>
+              <h3>Thanks for your patience!</h3>
+            </GoToMainPageInfo>
+            <ProgressBar
+              color={"#10B981"}
+              width={"100%"}
+              value={value}
+              max={100}
+            />
           </div>
-          <GoToMainPageInfo>
-            <h1>Going to the Main Page</h1>
-            <h3>Thanks for your patience!</h3>
-          </GoToMainPageInfo>
-          <ProgressBar color={"#10B981"} width={"100%"} value={value} max={100}/>
-        </div>
-      </GoToMainPageWrapper>
-    </>
-  );
+        </GoToMainPageWrapper>
+      </>
+    );
+  } else {
+    return null;
+  }
 };
 
 export default GoToMainPage;

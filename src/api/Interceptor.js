@@ -60,7 +60,7 @@ axiosInstance.interceptors.request.use(async req => {
     const refreshToken = user?.RefreshToken;
     if(!isExpired) return req
 
-    const response = await axios.head(`${BASE_URL}UserAccount/RefreshToken`, {
+    const response = await axios.post(`${BASE_URL}UserAccount/RefreshToken`, {
       refresh: refreshToken,
     });
 

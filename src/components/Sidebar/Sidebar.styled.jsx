@@ -39,12 +39,48 @@ export const SidebarWrapper = styled.aside`
     width: 208px;
     height: 56px;
     border-radius: 8px;
+
     & a {
       display: flex;
       align-items: center;
       border-radius: 8px;
       padding: 10px;
       transition: all 0.5s ease;
+      &.active {
+        background-color: var(--color-blue-400);
+        .logo_home {
+          path {
+            fill: var(--color-white);
+          }
+        }
+        .logo_handower {
+          path {
+            stroke: var(--color-white);
+          }
+        }
+        .logo_roster {
+          path {
+            fill: var(--color-white);
+            stroke: var(--color-white);
+          }
+        }
+        .logo_daily {
+          path {
+            stroke: var(--color-white);
+          }
+        }
+        .logo_member {
+          stroke: var(--color-white);
+        }
+        .logo_setting {
+          path:first-child {
+            fill: var(--color-white);
+          }
+          path {
+            stroke: var(--color-white);
+          }
+        }
+      }
       & span {
         font-family: "Inter";
         font-style: normal;

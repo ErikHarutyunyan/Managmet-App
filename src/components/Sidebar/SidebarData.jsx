@@ -9,7 +9,7 @@ import { FiUsers } from 'react-icons/fi';
 export const SidebarData = [
   {
     title: "Main Page",
-    path: "/",
+    path: "/dashboard",
     icon: <HomeIcon className="logo_home" />,
     cName: "nav-text",
   },
@@ -39,7 +39,7 @@ export const SidebarData = [
   },
   {
     title: "Setting",
-    path: "/support",
+    path: "/dashboard/setting",
     icon: <SettingIcon className="logo_setting" />,
     cName: "nav-text",
   },

@@ -75,8 +75,12 @@ export const LoginBg = styled.div`
       @media ${device.tablet} {
         font-size: 24px;
       }
+      @media ${device.mobileL} {
+        margin-top: 20px;
+        font-size: 16px;
+      }
       @media ${device.mobileM} {
-        margin-top: 16px;
+        margin-top: 0px;
         font-size: 16px;
       }
     }

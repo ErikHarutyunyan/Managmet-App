@@ -38,16 +38,19 @@ const LoginForm = ({ isLoading = (f) => f }) => {
   });
 
   const onSubmit = async (data) => {
+    debugger
+    setErrorMsg(null);
     await dispatch(loginUser(data));
-     setErrorMsg(null);
+    
   };
 
   useEffect(() => {
+    debugger;
     if (message.error) {
       setErrorMsg(message.message);
     } else if (message.message === "Login success") {
-      dispatch(clearMessage());
       isLoading((prev) => !prev);
+      dispatch(clearMessage());
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [message]);

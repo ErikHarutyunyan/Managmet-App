@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { SidebarData } from "./SidebarData";
 import { SidebarWrapper } from "./Sidebar.styled";
 
@@ -20,12 +20,11 @@ function Sidebar() {
             return index + 1 !== arr.length ? (
               <li
                 key={index}
-                className={sidebar ? item.cName + " active" : item.cName}
               >
-                <Link
-                  to={"#"}
-                  onMouseEnter={menuIconClick}
-                  onMouseLeave={menuIconClick}
+                <NavLink
+                  to={item.path}
+                  // onMouseEnter={menuIconClick}
+                  // onMouseLeave={menuIconClick}
                 >
                   {item.icon}
                   {/* {
@@ -33,7 +32,7 @@ function Sidebar() {
                     sidebar ? (<span>{item.title}</span>) : null
                   } */}
                   <span>{item.title}</span>
-                </Link>
+                </NavLink>
               </li>
             ) : null;
           })}
@@ -42,21 +41,21 @@ function Sidebar() {
           <li>
             {
               <li
-                className={
-                  sidebar
-                    ? sideBarLastItem.cName + " active"
-                    : sideBarLastItem.cName
-                }
-                onClick={menuIconClick}
+                // className={
+                //   sidebar
+                //     ? sideBarLastItem.cName + " active"
+                //     : sideBarLastItem.cName
+                // }
+                // onClick={menuIconClick}
               >
-                <Link
+                <NavLink
                   to={sideBarLastItem.path}
-                  onMouseEnter={menuIconClick}
-                  onMouseLeave={menuIconClick}
+                  // onMouseEnter={menuIconClick}
+                  // onMouseLeave={menuIconClick}
                 >
                   {sideBarLastItem.icon}
                   <span>{sideBarLastItem.title}</span>
-                </Link>
+                </NavLink>
               </li>
             }
           </li>

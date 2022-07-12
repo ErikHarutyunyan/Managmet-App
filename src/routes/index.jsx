@@ -5,6 +5,7 @@ import { DashboardPage } from "../pages/Dashboard";
 // import Layout from "../layout";
 
 import LoginPage from "../pages/LoginPage";
+import { MainPage } from "../pages/MainPage";
 
 import NotFoundPage from "../pages/NotFoundPage/";
 
@@ -23,7 +24,9 @@ export const index = () => {
               <DashboardPage />
             </PrivateRoute>
           }
-        />
+        >
+          <Route index element={<MainPage />} />
+        </Route>
         <Route path="/" element={<Navigate to="/dashboard" replace />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />

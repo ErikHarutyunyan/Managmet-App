@@ -95,6 +95,10 @@ export const GlobalStyle = createGlobalStyle`
     height: calc(100% - 100px) ;
     padding: 40px 80px 40px 60px;
   }
+  body.active-modal {
+    overflow-y: hidden;
+    
+  }
 `;
 
 const GlobalContainer = styled.div`

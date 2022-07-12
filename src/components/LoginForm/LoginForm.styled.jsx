@@ -12,6 +12,9 @@ export const LoginFormWrapper = styled.div`
     position: absolute;
     bottom: 40px;
   }
+  @media ${device.mobileM} {
+    bottom: 20px;
+  }
   .loginForm_container {
     width: 100%;
     padding: 20px 40px 56px 40px;
@@ -73,7 +76,13 @@ export const LoginFormUser = styled.div`
   width: 100%;
   padding-top: 32px;
   padding-bottom: 28px;
-
+  @media ${device.mobileL} {
+    padding-top: 20px;
+  }
+  @media ${device.mobileL} {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
   & .email_wrapper label,
   .pass_wrapper label {
     font-family: "Inter";
@@ -99,6 +108,9 @@ export const LoginFormUser = styled.div`
       right: 10px;
       cursor: pointer;
       background: var(--color-white);
+    }
+    @media ${device.mobileM} {
+      margin-top: 10px;
     }
   }
 
@@ -256,10 +268,17 @@ export const LoginFormUser = styled.div`
         padding-top: 10px;
         padding-bottom: 10px;
       }
-      @media ${device.mobileM} {
-        font-size: 16px;
+
+      @media ${device.mobileL} {
+        margin-top: 24px;
         padding-top: 8px;
         padding-bottom: 8px;
+      }
+      @media ${device.mobileM} {
+        margin-top: 15px;
+        font-size: 16px;
+        padding-top: 4px;
+        padding-bottom: 4px;
       }
     }
   }

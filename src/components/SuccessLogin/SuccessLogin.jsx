@@ -8,40 +8,44 @@ import {
   SuccessLoginUser,
 } from "./SuccessLogin.styled";
 
-const SuccessLogin = () => {
+const SuccessLogin = ({ successLog, setSuccessLog }) => {
   const navigate = useNavigate();
 
   const handlerHome = () => {
     navigate("/dashboard");
   };
 
-  return (
-    <>
-      <SuccessLoginWrapper>
-        <div className="successLogin_container">
-          <div className="successLogin">
-            <BiLike color="#10B981"/>
-          </div>
-          <SuccessLoginInfo>
-            <h1>Successfully Login</h1>
-            <h3>You have logged in!</h3>
-          </SuccessLoginInfo>
-          <SuccessLoginUser>
-            <div className="button_sucessLogin_wrapper">
-              <button
-                type="submit"
-                value="submit"
-                id="button_sucessLogin"
-                onClick={handlerHome}
-              >
-                Go to Main Page
-              </button>
+  if (successLog) {
+    return (
+      <>
+        <SuccessLoginWrapper>
+          <div className="successLogin_container">
+            <div className="successLogin">
+              <BiLike color="#10B981" />
             </div>
-          </SuccessLoginUser>
-        </div>
-      </SuccessLoginWrapper>
-    </>
-  );
+            <SuccessLoginInfo>
+              <h1>Successfully Login</h1>
+              <h3>You have logged in!</h3>
+            </SuccessLoginInfo>
+            <SuccessLoginUser>
+              <div className="button_sucessLogin_wrapper">
+                <button
+                  type="submit"
+                  value="submit"
+                  id="button_sucessLogin"
+                  onClick={handlerHome}
+                >
+                  Go to Main Page
+                </button>
+              </div>
+            </SuccessLoginUser>
+          </div>
+        </SuccessLoginWrapper>
+      </>
+    );
+  } else {
+    return null;
+  }
 };
 
 export default SuccessLogin;
