@@ -18,9 +18,7 @@ function Sidebar() {
         <ul>
           {SidebarData.map((item, index, arr) => {
             return index + 1 !== arr.length ? (
-              <li
-                key={index}
-              >
+              <li key={index}>
                 <NavLink
                   to={item.path}
                   // onMouseEnter={menuIconClick}
@@ -41,12 +39,12 @@ function Sidebar() {
           <li>
             {
               <li
-                // className={
-                //   sidebar
-                //     ? sideBarLastItem.cName + " active"
-                //     : sideBarLastItem.cName
-                // }
-                // onClick={menuIconClick}
+              // className={
+              //   sidebar
+              //     ? sideBarLastItem.cName + " active"
+              //     : sideBarLastItem.cName
+              // }
+              // onClick={menuIconClick}
               >
                 <NavLink
                   to={sideBarLastItem.path}

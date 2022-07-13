@@ -1,11 +1,10 @@
 import GlobalContainer from "../../themes/Global.styled";
 import { HeaderWrapper, HeaderBox } from "./Header.styled";
-import {HeaderLogo} from "../Images/"
+import { HeaderLogo } from "../Images/";
 
 const Header = ({ userName }) => {
   return (
     <HeaderBox>
-        
       <GlobalContainer>
         <HeaderWrapper>
           <div className="header_left">
@@ -16,9 +15,7 @@ const Header = ({ userName }) => {
               <p>{userName ? userName : "Admin"} System</p>
             </div>
           </div>
-          <div className="header_right">
-
-          </div>
+          <div className="header_right"></div>
         </HeaderWrapper>
       </GlobalContainer>
     </HeaderBox>

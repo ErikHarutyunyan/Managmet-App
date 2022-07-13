@@ -2,6 +2,9 @@
 import styled from "styled-components";
 
 export const HeaderBox = styled.header`
+  .active-modal & {
+    filter: blur(3px);
+  }
   background: var(--color-gray-100);
 `;
 
