@@ -94,7 +94,7 @@ export default function Modal() {
             <ModalContentFooter>
               <div className="content_footer-container">
                 <div className="footer_container-option">
-                  <div className="option_type">
+                  <div className={`option_type option_type-entry ${general || schedule || member ? "":"active"}`}>
                     <span className="type_logo">
                       <svg
                         width="32"
@@ -175,7 +175,7 @@ export default function Modal() {
                     </defs>
                   </svg>
 
-                  <div className="option_type">
+                  <div className={`option_type option_type-dataEntry ${general || schedule || member ? "active":""}`}>
                     <span className="type_logo">
                       <svg
                         width="17"
@@ -242,7 +242,7 @@ export default function Modal() {
                     </defs>
                   </svg>
 
-                  <div className="option_type">
+                  <div className={`option_type option_type-dataPrev ${general && schedule && member ? "active":""}`}>
                     <span className="type_logo">
                       <svg
                         width="17"

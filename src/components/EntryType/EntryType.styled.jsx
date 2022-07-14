@@ -227,9 +227,11 @@ export const ModalContentFooter = styled.div`
     border: 1px solid #f8fafc;
     border-radius: 5px;
     cursor: pointer;
-
-    &:hover {
+    pointer-events: none;
+    opacity: 0.4;
+    &.option_type-entry.active {
       background: #f1f5f9;
+      opacity: 1;
       .type_logo {
         svg {
           path {
@@ -241,6 +243,61 @@ export const ModalContentFooter = styled.div`
         color: #3460dc;
       }
     }
+    &.option_type-member.active {
+      background: #f1f5f9;
+      opacity: 1;
+      .type_logo {
+        svg {
+          path {
+            stroke: #3460dc;
+          }
+        }
+      }
+      p {
+        color: #3460dc;
+      }
+    }
+    &.option_type-dataEntry.active {
+      background: #f1f5f9;
+      opacity: 1;
+      .type_logo {
+        svg {
+          path {
+            stroke: #3460dc;
+          }
+        }
+      }
+      p {
+        color: #3460dc;
+      }
+    }
+    &.option_type-dataPrev.active {
+      background: #f1f5f9;
+      opacity: 1;
+      .type_logo {
+        svg {
+          path {
+            stroke: #3460dc;
+          }
+        }
+      }
+      p {
+        color: #3460dc;
+      }
+    }
+    /* &:hover {
+      background: #f1f5f9;
+      .type_logo {
+        svg {
+          path {
+            stroke: #3460dc;
+          }
+        }
+      }
+      p {
+        color: #3460dc;
+      }
+    } */
 
     p {
       font-style: normal;
