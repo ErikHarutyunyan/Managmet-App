@@ -7,7 +7,8 @@ import nursIcon from "../../assets/icons/nursing_care.png";
 import selectDat from "../../assets/icons/selectDat.png";
 import selectLogo from "../../assets/icons/selectLogo.png";
 import selectMain from "../../assets/img/select.png";
-import generalEntryLogo from "../../assets/img/generalEntryLogo.png";
+import generalEntryLogo from "../../assets/icons/generalEntryLogo.png";
+import uploadFileImg from "../../assets/icons/uploadFileImg.png"
 
 export {
   HeaderLogo,
@@ -20,4 +21,5 @@ export {
   selectLogo,
   selectMain,
   generalEntryLogo,
+  uploadFileImg
 };

@@ -99,6 +99,10 @@ export const GlobalStyle = createGlobalStyle`
     overflow-y: hidden;
     
   }
+
+
+
+
 `;
 
 const GlobalContainer = styled.div`

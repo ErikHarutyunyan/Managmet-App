@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { GeneralEntry } from "../GeneralEntry";
-import { selectDat, selectLogo, selectMain } from "../Images";
+import { generalEntryLogo, selectDat, selectLogo, selectMain } from "../Images";
 import { SelectDataType } from "../SelectDataType";
 import {
   ModalButton,
   ModalContent,
-  ModalContentContainer,
   ModalContentFooter,
   ModalContentHeader,
   ModalWrapper,
@@ -43,11 +42,18 @@ export default function Modal() {
             <ModalContentHeader>
               <div className="content_header-info">
                 <div className="header_info-logo">
-                  <img src={selectLogo} alt="selectLogo" />
+                  <img
+                    src={general ? generalEntryLogo : selectLogo}
+                    alt="selectLogo"
+                  />
                 </div>
                 <div className="header_info-text">
-                  <h3>Select Data Entry Type</h3>
-                  <p>Please select your Data Entry Type</p>
+                  <h3>{general ? "Data Entry" : "Select Data Entry Type"}</h3>
+                  <p>
+                    {general
+                      ? "Please input the information"
+                      : "Please select your Data Entry Type"}
+                  </p>
                 </div>
               </div>
               <button className="close-modal" onClick={toggleModal}>
@@ -94,7 +100,11 @@ export default function Modal() {
             <ModalContentFooter>
               <div className="content_footer-container">
                 <div className="footer_container-option">
-                  <div className={`option_type option_type-entry ${general || schedule || member ? "":"active"}`}>
+                  <div
+                    className={`option_type option_type-entry ${
+                      general || schedule || member ? "" : "active"
+                    }`}
+                  >
                     <span className="type_logo">
                       <svg
                         width="32"
@@ -175,7 +185,11 @@ export default function Modal() {
                     </defs>
                   </svg>
 
-                  <div className={`option_type option_type-dataEntry ${general || schedule || member ? "active":""}`}>
+                  <div
+                    className={`option_type option_type-dataEntry ${
+                      general || schedule || member ? "active" : ""
+                    }`}
+                  >
                     <span className="type_logo">
                       <svg
                         width="17"
@@ -242,7 +256,11 @@ export default function Modal() {
                     </defs>
                   </svg>
 
-                  <div className={`option_type option_type-dataPrev ${general && schedule && member ? "active":""}`}>
+                  <div
+                    className={`option_type option_type-dataPrev ${
+                      general && schedule && member ? "active" : ""
+                    }`}
+                  >
                     <span className="type_logo">
                       <svg
                         width="17"

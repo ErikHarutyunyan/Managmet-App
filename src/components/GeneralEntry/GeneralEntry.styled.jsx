@@ -1,6 +1,9 @@
 import styled from "styled-components";
 
 export const GeneralEntryWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
   &.container_box-one {
     padding: 20px 20px 14px 20px;
   }
@@ -35,6 +38,9 @@ export const GeneralEntryWrapper = styled.div`
       padding-top: 11px;
       padding-bottom: 11px;
       margin-top: 8px;
+      &:focus {
+        border: 2px solid #6183e4;
+      }
       &::placeholder {
         font-style: normal;
         font-weight: 400;
@@ -229,12 +235,88 @@ export const GeneralEntryWrapper = styled.div`
           align-items: center;
           text-align: center;
           letter-spacing: -0.02em;
-
           /* Neutral / Gray 500 */
-
           color: #64748b;
         }
       }
     }
+  }
+
+  .container_box-two {
+    #input-file-upload {
+      display: none;
+    }
+  }
+  .box_two-wrapper.desc {
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+  #input-file-upload {
+    display: none;
+  }
+
+  #label-file-upload {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  #label-file-upload.drag-active {
+    background-color: #ffffff;
+  }
+
+  .upload-button {
+    cursor: pointer;
+    padding: 0.25rem;
+    font-size: 1rem;
+    border: none;
+    font-family: "Oswald", sans-serif;
+    background-color: transparent;
+  }
+
+  .upload-button:hover {
+    text-decoration-line: underline;
+  }
+
+  #drag-file-element {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 1rem;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+  }
+  .accor {
+    transition: all 0.4s ease;
+  }
+  .accor .body {
+    max-height: 0;
+    overflow: hidden;
+    padding: 0px;
+    border: none;
+    transition: all 0.4s ease;
+  }
+  .accor.active > .body {
+    max-height: 250px;
+    padding: 4px 8px 8px 8px;
+    border: initial;
+    transition: all 0.4s ease;
+  }
+  & h4 {
+    display: inline-block;
+  }
+  & .icons {
+    transform: rotate(0);
+    float: right;
+    transition: all 0.4s ease;
+  }
+  .accor.active > .icons {
+    transform: rotate(180deg);
+    transition: all 0.4s ease;
   }
 `;
